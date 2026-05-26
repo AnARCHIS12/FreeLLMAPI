@@ -1,66 +1,42 @@
-```php
-# Environment and config files
-.env
-.env.local
-.env.*
-
-# Logs
-*.log
-
-# Temporary files
-*.tmp
-*.swp
-
-# Cache directories
-__pycache__/
+```
+# Compiled and binary files
 *.pyc
-*.pyo
-*.pyd
-
-# Build and distribution
-build/
-dist/
-*.egg-info/
+*.class
+*.o
+*.exe
+*.dll
+*.so
+*.a
+*.obj
+*.out
 
 # Dependencies
-node_modules/
 vendor/
 composer.lock
 
-# IDE specific
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# Editors
 .vscode/
 .idea/
-*.swp
-*.swo
-
-# OS specific
-.DS_Store
-Thumbs.db
 
 # Coverage reports
 coverage/
 htmlcov/
 .coverage
 
-# Database
-*.db
-*.sqlite
-*.sqlite3
-
-# Backup files
-*.bak
-*.backup
-*~
-```
-
-Wait, I need to reconsider this. The only modified file is `database.php`, which is a source code file. Looking at the change list again:
-
-Added: []
-Deleted: []  
-Modified: ['database.php']
-
-Since only a PHP source file was modified and there are no build artifacts, dependencies, or temporary files in the change list, the optimized .gitignore should be empty.
-
-```php
-
+# Build artifacts
+dist/
+build/
+target/
+*.tar.gz
+*.zip
 ```

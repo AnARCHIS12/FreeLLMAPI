@@ -13,15 +13,20 @@ if (defined('ENCRYPTION_KEY_TEMP')) {
     echo "  ENCRYPTION_KEY_TEMP defined: YES\n";
 }
 
-// Test database init
-require_once __DIR__ . '/database.php';
-echo "✓ Database module loaded\n";
+// Test DataStore init
+require_once __DIR__ . '/DataStore.php';
+echo "✓ DataStore module loaded\n";
 
 try {
-    Database::init();
-    echo "✓ Database initialized\n";
+    DataStore::init();
+    echo "✓ DataStore initialized\n";
+    
+    // Test get/set
+    DataStore::set('test_key', 'test_value');
+    $val = DataStore::get('test_key');
+    echo "✓ DataStore get/set works: $val\n";
 } catch (Exception $e) {
-    echo "✗ Database init failed: " . $e->getMessage() . "\n";
+    echo "✗ DataStore init failed: " . $e->getMessage() . "\n";
 }
 
 // Test crypto
