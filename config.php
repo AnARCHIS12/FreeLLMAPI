@@ -17,16 +17,23 @@ $encryptionKey = getenv('ENCRYPTION_KEY') ?: null;
 if (!$encryptionKey) {
     // Try to load from database for dev mode
     if (file_exists(DB_PATH)) {
-        $db = new SQLite3(DB_PATH);
-        $result = $db->querySingle("SELECT value FROM settings WHERE key = 'encryption_key'");
-        if ($result) {
-            $encryptionKey = $result;
+        try {
+            $db = new SQLite3(DB_PATH);
+            $result = $db->querySingle("SELECT value FROM settings WHERE key = 'encryption_key'");
+            if ($result) {
+                $encryptionKey = $result;
+            }
+            $db->close();
+        } catch (Exception $e) {
+            // Database might be corrupted or inaccessible, will generate new key
         }
-        $db->close();
     }
 }
+// If no key found, generate one automatically (for first-run on shared hosting)
 if (!$encryptionKey || strlen($encryptionKey) !== 64) {
-    die("ENCRYPTION_KEY must be set as environment variable (64 hex chars)\n");
+    $encryptionKey = bin2hex(random_bytes(32));
+    // Store it temporarily, will be saved to DB when DB is initialized
+    define('ENCRYPTION_KEY_TEMP', $encryptionKey);
 }
 define('ENCRYPTION_KEY', $encryptionKey);
 

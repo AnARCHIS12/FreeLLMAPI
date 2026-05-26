@@ -154,8 +154,14 @@ class Database {
             return;
         }
         
-        // Generate new key
-        $newKey = bin2hex(random_bytes(32));
+        // Check if we have a temp key from config (first-run scenario)
+        if (defined('ENCRYPTION_KEY_TEMP')) {
+            $newKey = ENCRYPTION_KEY_TEMP;
+        } else {
+            // Generate new key
+            $newKey = bin2hex(random_bytes(32));
+        }
+        
         $stmt = self::$db->prepare("INSERT INTO settings (key, value) VALUES (:key, :value)");
         $stmt->bindValue(':key', SQLITE3_TEXT, 'encryption_key');
         $stmt->bindValue(':value', SQLITE3_TEXT, $newKey);
