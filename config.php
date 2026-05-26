@@ -14,22 +14,22 @@ define('HOST', '0.0.0.0');
 // Encryption key (must be 64 hex characters = 32 bytes)
 // Generate with: bin2hex(random_bytes(32))
 $encryptionKey = getenv('ENCRYPTION_KEY') ?: null;
-if (!$encryptionKey) {
-    // Try to load from database for dev mode
-    if (file_exists(DB_PATH)) {
-        try {
-            $db = new SQLite3(DB_PATH);
-            $result = $db->querySingle("SELECT value FROM settings WHERE key = 'encryption_key'");
-            if ($result) {
-                $encryptionKey = $result;
-            }
-            $db->close();
-        } catch (Exception $e) {
-            // Database might be corrupted or inaccessible, will generate new key
+
+// If no env var, try to load from database (only if DB exists)
+if (!$encryptionKey && file_exists(DB_PATH)) {
+    try {
+        $db = new SQLite3(DB_PATH);
+        $result = $db->querySingle("SELECT value FROM settings WHERE key = 'encryption_key'");
+        if ($result) {
+            $encryptionKey = $result;
         }
+        $db->close();
+    } catch (Exception $e) {
+        // Database might be corrupted or inaccessible, will generate new key
     }
 }
-// If no key found, generate one automatically (for first-run on shared hosting)
+
+// If still no key, generate one automatically (for first-run on shared hosting)
 if (!$encryptionKey || strlen($encryptionKey) !== 64) {
     $encryptionKey = bin2hex(random_bytes(32));
     // Store it temporarily, will be saved to DB when DB is initialized
