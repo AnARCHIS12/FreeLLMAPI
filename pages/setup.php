@@ -13,11 +13,11 @@
 
     <div class="setup-intro">
         <div class="intro-card">
-            <h2>🎯 Why Multiple Providers?</h2>
+            <h2><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Why Multiple Providers?</h2>
             <p>Each provider offers different free tier limits. By registering with multiple services, you maximize your available tokens and ensure high availability through automatic fallback.</p>
         </div>
         <div class="intro-card">
-            <h2>⚡ Quick Start</h2>
+            <h2><i class="fa-solid fa-list-check" aria-hidden="true"></i> Quick Start</h2>
             <p>1. Choose providers from the list below<br>
                2. Click the link to visit their website<br>
                3. Sign up for a free account<br>
@@ -30,7 +30,7 @@
     <div class="provider-grid">
         <!-- Groq -->
         <div class="provider-card" data-provider="groq">
-            <div class="provider-logo">🚀</div>
+            <div class="provider-logo"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i></div>
             <h3>Groq</h3>
             <div class="provider-limits">
                 <span class="limit-badge">30 RPM</span>
@@ -44,12 +44,12 @@
                 <li>Create a new key</li>
                 <li>Copy and add to Admin panel</li>
             </ul>
-            <a href="https://console.groq.com/keys" target="_blank" rel="noopener" class="provider-btn">Get API Key →</a>
+            <a href="https://console.groq.com/keys" target="_blank" rel="noopener" class="provider-btn">Get API Key <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
         </div>
 
         <!-- Cerebras -->
         <div class="provider-card" data-provider="cerebras">
-            <div class="provider-logo">🧠</div>
+            <div class="provider-logo"><i class="fa-solid fa-brain" aria-hidden="true"></i></div>
             <h3>Cerebras</h3>
             <div class="provider-limits">
                 <span class="limit-badge">30 RPM</span>
@@ -63,12 +63,12 @@
                 <li>Generate your API key</li>
                 <li>Add to Admin panel</li>
             </ul>
-            <a href="https://cloud.cerebras.ai" target="_blank" rel="noopener" class="provider-btn">Get API Key →</a>
+            <a href="https://cloud.cerebras.ai" target="_blank" rel="noopener" class="provider-btn">Get API Key <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
         </div>
 
         <!-- SambaNova -->
         <div class="provider-card" data-provider="sambanova">
-            <div class="provider-logo">⚡</div>
+            <div class="provider-logo"><i class="fa-solid fa-wave-square" aria-hidden="true"></i></div>
             <h3>SambaNova</h3>
             <div class="provider-limits">
                 <span class="limit-badge">20 RPM</span>
@@ -82,12 +82,12 @@
                 <li>Create API credentials</li>
                 <li>Submit to Admin panel</li>
             </ul>
-            <a href="https://cloud.sambanova.ai" target="_blank" rel="noopener" class="provider-btn">Get API Key →</a>
+            <a href="https://cloud.sambanova.ai" target="_blank" rel="noopener" class="provider-btn">Get API Key <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
         </div>
 
         <!-- OpenRouter -->
         <div class="provider-card" data-provider="openrouter">
-            <div class="provider-logo">🌐</div>
+            <div class="provider-logo"><i class="fa-solid fa-route" aria-hidden="true"></i></div>
             <h3>OpenRouter</h3>
             <div class="provider-limits">
                 <span class="limit-badge">20 RPM</span>
@@ -101,12 +101,12 @@
                 <li>Create a new API key</li>
                 <li>Add to Admin panel</li>
             </ul>
-            <a href="https://openrouter.ai/keys" target="_blank" rel="noopener" class="provider-btn">Get API Key →</a>
+            <a href="https://openrouter.ai/keys" target="_blank" rel="noopener" class="provider-btn">Get API Key <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
         </div>
 
         <!-- GitHub Models -->
         <div class="provider-card" data-provider="github">
-            <div class="provider-logo">🐙</div>
+            <div class="provider-logo"><i class="fa-brands fa-github" aria-hidden="true"></i></div>
             <h3>GitHub Models</h3>
             <div class="provider-limits">
                 <span class="limit-badge">10 RPM</span>
@@ -120,12 +120,12 @@
                 <li>Generate personal access token</li>
                 <li>Configure in Admin panel</li>
             </ul>
-            <a href="https://github.com/marketplace/models" target="_blank" rel="noopener" class="provider-btn">Get API Key →</a>
+            <a href="https://github.com/marketplace/models" target="_blank" rel="noopener" class="provider-btn">Get API Key <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
         </div>
 
         <!-- Mistral -->
         <div class="provider-card" data-provider="mistral">
-            <div class="provider-logo">🌪️</div>
+            <div class="provider-logo"><i class="fa-solid fa-wind" aria-hidden="true"></i></div>
             <h3>Mistral AI</h3>
             <div class="provider-limits">
                 <span class="limit-badge">2 RPM</span>
@@ -139,12 +139,12 @@
                 <li>Generate new key</li>
                 <li>Add to Admin panel</li>
             </ul>
-            <a href="https://console.mistral.ai/api-keys" target="_blank" rel="noopener" class="provider-btn">Get API Key →</a>
+            <a href="https://console.mistral.ai/api-keys" target="_blank" rel="noopener" class="provider-btn">Get API Key <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
         </div>
 
         <!-- Cohere -->
         <div class="provider-card" data-provider="cohere">
-            <div class="provider-logo">💬</div>
+            <div class="provider-logo"><i class="fa-solid fa-comments" aria-hidden="true"></i></div>
             <h3>Cohere</h3>
             <div class="provider-limits">
                 <span class="limit-badge">20 RPM</span>
@@ -158,12 +158,12 @@
                 <li>Copy your API key</li>
                 <li>Submit to Admin</li>
             </ul>
-            <a href="https://dashboard.cohere.com/api-keys" target="_blank" rel="noopener" class="provider-btn">Get API Key →</a>
+            <a href="https://dashboard.cohere.com/api-keys" target="_blank" rel="noopener" class="provider-btn">Get API Key <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
         </div>
 
         <!-- Cloudflare -->
         <div class="provider-card" data-provider="cloudflare">
-            <div class="provider-logo">☁️</div>
+            <div class="provider-logo"><i class="fa-solid fa-cloud" aria-hidden="true"></i></div>
             <h3>Cloudflare Workers AI</h3>
             <div class="provider-limits">
                 <span class="limit-badge">~18-45M tokens</span>
@@ -177,12 +177,12 @@
                 <li>Generate API token with Account ID</li>
                 <li>Format: account_id:token in Admin</li>
             </ul>
-            <a href="https://developers.cloudflare.com/workers-ai" target="_blank" rel="noopener" class="provider-btn">Get API Key →</a>
+            <a href="https://developers.cloudflare.com/workers-ai" target="_blank" rel="noopener" class="provider-btn">Get API Key <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
         </div>
 
         <!-- HuggingFace -->
         <div class="provider-card" data-provider="huggingface">
-            <div class="provider-logo">🤗</div>
+            <div class="provider-logo"><i class="fa-solid fa-face-smile" aria-hidden="true"></i></div>
             <h3>HuggingFace Router</h3>
             <div class="provider-limits">
                 <span class="limit-badge">~1-3M tokens</span>
@@ -192,16 +192,16 @@
             <ul class="provider-steps">
                 <li>Visit <a href="https://huggingface.co" target="_blank" rel="noopener">huggingface.co</a></li>
                 <li>Create free account</li>
-                <li>Go to Settings → Tokens</li>
+                <li>Go to Settings > Tokens</li>
                 <li>Create read token</li>
                 <li>Add to Admin panel</li>
             </ul>
-            <a href="https://huggingface.co/settings/tokens" target="_blank" rel="noopener" class="provider-btn">Get API Key →</a>
+            <a href="https://huggingface.co/settings/tokens" target="_blank" rel="noopener" class="provider-btn">Get API Key <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
         </div>
 
         <!-- Zhipu -->
         <div class="provider-card" data-provider="zhipu">
-            <div class="provider-logo">🇨🇳</div>
+            <div class="provider-logo"><i class="fa-solid fa-globe" aria-hidden="true"></i></div>
             <h3>Zhipu AI (Z.ai)</h3>
             <div class="provider-limits">
                 <span class="limit-badge">1M TPD</span>
@@ -215,12 +215,12 @@
                 <li>Create API key</li>
                 <li>Add to Admin panel</li>
             </ul>
-            <a href="https://open.bigmodel.cn/usercenter/apikeys" target="_blank" rel="noopener" class="provider-btn">Get API Key →</a>
+            <a href="https://open.bigmodel.cn/usercenter/apikeys" target="_blank" rel="noopener" class="provider-btn">Get API Key <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
         </div>
 
         <!-- NVIDIA NIM -->
         <div class="provider-card" data-provider="nvidia">
-            <div class="provider-logo">🎮</div>
+            <div class="provider-logo"><i class="fa-solid fa-microchip" aria-hidden="true"></i></div>
             <h3>NVIDIA NIM</h3>
             <div class="provider-limits">
                 <span class="limit-badge">Credits-based</span>
@@ -234,28 +234,28 @@
                 <li>Get API key</li>
                 <li>Configure in Admin</li>
             </ul>
-            <a href="https://build.nvidia.com/explore/discover" target="_blank" rel="noopener" class="provider-btn">Get API Key →</a>
+            <a href="https://build.nvidia.com/explore/discover" target="_blank" rel="noopener" class="provider-btn">Get API Key <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
         </div>
     </div>
 
     <!-- Tips Section -->
     <div class="tips-section">
-        <h2>💡 Pro Tips</h2>
+        <h2><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Pro Tips</h2>
         <div class="tips-grid">
             <div class="tip-card">
-                <h3>📊 Track Your Usage</h3>
+                <h3><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Track Your Usage</h3>
                 <p>Monitor your token consumption in the Admin panel to avoid hitting limits unexpectedly.</p>
             </div>
             <div class="tip-card">
-                <h3>🔄 Rotate Keys</h3>
+                <h3><i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i> Rotate Keys</h3>
                 <p>Add multiple keys per provider to distribute load and increase effective rate limits.</p>
             </div>
             <div class="tip-card">
-                <h3>🎯 Prioritize Speed</h3>
+                <h3><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Prioritize Speed</h3>
                 <p>The auto-router prioritizes faster providers. Add Groq and Cerebras for best latency.</p>
             </div>
             <div class="tip-card">
-                <h3>🛡️ Security First</h3>
+                <h3><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Security First</h3>
                 <p>All API keys are encrypted with AES-256-GCM before storage. Never share your unified key.</p>
             </div>
         </div>
@@ -263,7 +263,7 @@
 
     <!-- FAQ Section -->
     <div class="faq-section">
-        <h2>❓ Frequently Asked Questions</h2>
+        <h2><i class="fa-solid fa-circle-question" aria-hidden="true"></i> Frequently Asked Questions</h2>
         <div class="faq-list">
             <details class="faq-item">
                 <summary>Are these APIs really free?</summary>

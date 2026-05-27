@@ -48,11 +48,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Save to database
                 $db = Database::getInstance();
                 $stmt = $db->prepare("INSERT INTO api_keys (platform, label, encrypted_key, iv, auth_tag, status) VALUES (:platform, :label, :encrypted_key, :iv, :auth_tag, 'valid')");
-                $stmt->bindValue(':platform', SQLITE3_TEXT, $platform);
-                $stmt->bindValue(':label', SQLITE3_TEXT, $label);
-                $stmt->bindValue(':encrypted_key', SQLITE3_TEXT, $encrypted['encrypted']);
-                $stmt->bindValue(':iv', SQLITE3_TEXT, $encrypted['iv']);
-                $stmt->bindValue(':auth_tag', SQLITE3_TEXT, $encrypted['authTag']);
+                $stmt->bindValue(':platform', $platform, SQLITE3_TEXT);
+                $stmt->bindValue(':label', $label, SQLITE3_TEXT);
+                $stmt->bindValue(':encrypted_key', $encrypted['encrypted'], SQLITE3_TEXT);
+                $stmt->bindValue(':iv', $encrypted['iv'], SQLITE3_TEXT);
+                $stmt->bindValue(':auth_tag', $encrypted['authTag'], SQLITE3_TEXT);
                 $stmt->execute();
                 
                 $message = "API key added successfully for $platform!";
@@ -73,8 +73,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         $db = Database::getInstance();
         $stmt = $db->prepare("UPDATE models SET enabled = :enabled WHERE id = :id");
-        $stmt->bindValue(':enabled', SQLITE3_INTEGER, $enabled);
-        $stmt->bindValue(':id', SQLITE3_INTEGER, $modelId);
+        $stmt->bindValue(':enabled', $enabled, SQLITE3_INTEGER);
+        $stmt->bindValue(':id', $modelId, SQLITE3_INTEGER);
         $stmt->execute();
         
         $message = "Model updated successfully!";
@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         $db = Database::getInstance();
         $stmt = $db->prepare("DELETE FROM api_keys WHERE id = :id");
-        $stmt->bindValue(':id', SQLITE3_INTEGER, $keyId);
+        $stmt->bindValue(':id', $keyId, SQLITE3_INTEGER);
         $stmt->execute();
         
         $message = "API key deleted successfully!";
@@ -120,7 +120,7 @@ while ($row = $requestsResult->fetchArray(SQLITE3_ASSOC)) {
 }
 
 // Determine current page
-$page = $_GET['page'] ?? 'home';
+$page = $_GET['page'] ?? 'presentation';
 
 ?>
 <!DOCTYPE html>
@@ -129,6 +129,7 @@ $page = $_GET['page'] ?? 'home';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FreeLLMAPI - Free LLM API Gateway</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
@@ -140,10 +141,11 @@ $page = $_GET['page'] ?? 'home';
             <span class="logo-glitch">FreeLLM<span class="accent">API</span></span>
         </div>
         <ul class="nav-links">
-            <li><a href="?page=home" class="<?php echo $page === 'home' ? 'active' : ''; ?>">Chat</a></li>
-            <li><a href="?page=setup" class="<?php echo $page === 'setup' ? 'active' : ''; ?>">Setup Guide</a></li>
+            <li><a href="?page=presentation" class="<?php echo $page === 'presentation' ? 'active' : ''; ?>">Projet</a></li>
+            <li><a href="?page=home" class="<?php echo $page === 'home' ? 'active' : ''; ?>">Console</a></li>
+            <li><a href="?page=setup" class="<?php echo $page === 'setup' ? 'active' : ''; ?>">Setup</a></li>
             <li><a href="?page=admin" class="<?php echo $page === 'admin' ? 'active' : ''; ?>">Admin</a></li>
-            <li><a href="?page=api" class="<?php echo $page === 'api' ? 'active' : ''; ?>">API Docs</a></li>
+            <li><a href="?page=api" class="<?php echo $page === 'api' ? 'active' : ''; ?>">API</a></li>
         </ul>
         <div class="nav-status">
             <span class="status-indicator <?php echo count($apiKeys) > 0 ? 'online' : 'offline'; ?>"></span>
@@ -154,7 +156,9 @@ $page = $_GET['page'] ?? 'home';
     <!-- Message Banner -->
     <?php if ($message): ?>
     <div class="message-banner <?php echo $messageType; ?>">
-        <span class="message-icon"><?php echo $messageType === 'success' ? '✓' : '✗'; ?></span>
+        <span class="message-icon">
+            <i class="fa-solid <?php echo $messageType === 'success' ? 'fa-check' : 'fa-xmark'; ?>" aria-hidden="true"></i>
+        </span>
         <span><?php echo htmlspecialchars($message); ?></span>
     </div>
     <?php endif; ?>
@@ -163,6 +167,9 @@ $page = $_GET['page'] ?? 'home';
     <main class="cyber-main">
         <?php
         switch ($page) {
+            case 'presentation':
+                include __DIR__ . '/pages/presentation.php';
+                break;
             case 'home':
                 include __DIR__ . '/pages/home.php';
                 break;
@@ -176,7 +183,7 @@ $page = $_GET['page'] ?? 'home';
                 include __DIR__ . '/pages/api.php';
                 break;
             default:
-                include __DIR__ . '/pages/home.php';
+                include __DIR__ . '/pages/presentation.php';
         }
         ?>
     </main>

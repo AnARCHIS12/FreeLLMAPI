@@ -29,32 +29,32 @@ $tomorrow = date('Y-m-d', strtotime('+1 day'));
 
 // Count requests today
 $stmt = $db->prepare("SELECT COUNT(*) as count FROM requests WHERE created_at >= :today AND created_at < :tomorrow");
-$stmt->bindValue(':today', SQLITE3_TEXT, $today);
-$stmt->bindValue(':tomorrow', SQLITE3_TEXT, $tomorrow);
+$stmt->bindValue(':today', $today, SQLITE3_TEXT);
+$stmt->bindValue(':tomorrow', $tomorrow, SQLITE3_TEXT);
 $result = $stmt->execute();
 $row = $result->fetchArray(SQLITE3_ASSOC);
 $requestsToday = (int)($row['count'] ?? 0);
 
 // Count tokens used today
 $stmt = $db->prepare("SELECT COALESCE(SUM(input_tokens + output_tokens), 0) as total FROM requests WHERE created_at >= :today AND created_at < :tomorrow");
-$stmt->bindValue(':today', SQLITE3_TEXT, $today);
-$stmt->bindValue(':tomorrow', SQLITE3_TEXT, $tomorrow);
+$stmt->bindValue(':today', $today, SQLITE3_TEXT);
+$stmt->bindValue(':tomorrow', $tomorrow, SQLITE3_TEXT);
 $result = $stmt->execute();
 $row = $result->fetchArray(SQLITE3_ASSOC);
 $tokensUsed = (int)($row['total'] ?? 0);
 
 // Calculate average latency for successful requests today
 $stmt = $db->prepare("SELECT AVG(latency_ms) as avg_latency FROM requests WHERE created_at >= :today AND created_at < :tomorrow AND status = 'success'");
-$stmt->bindValue(':today', SQLITE3_TEXT, $today);
-$stmt->bindValue(':tomorrow', SQLITE3_TEXT, $tomorrow);
+$stmt->bindValue(':today', $today, SQLITE3_TEXT);
+$stmt->bindValue(':tomorrow', $tomorrow, SQLITE3_TEXT);
 $result = $stmt->execute();
 $row = $result->fetchArray(SQLITE3_ASSOC);
 $avgLatency = (int)round($row['avg_latency'] ?? 0);
 
 // Calculate success rate
 $stmt = $db->prepare("SELECT COUNT(*) as total, SUM(CASE WHEN status = 'success' THEN 1 ELSE 0 END) as success FROM requests WHERE created_at >= :today AND created_at < :tomorrow");
-$stmt->bindValue(':today', SQLITE3_TEXT, $today);
-$stmt->bindValue(':tomorrow', SQLITE3_TEXT, $tomorrow);
+$stmt->bindValue(':today', $today, SQLITE3_TEXT);
+$stmt->bindValue(':tomorrow', $tomorrow, SQLITE3_TEXT);
 $result = $stmt->execute();
 $row = $result->fetchArray(SQLITE3_ASSOC);
 $totalRequests = (int)($row['total'] ?? 0);

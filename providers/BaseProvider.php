@@ -4,9 +4,6 @@
  */
 
 abstract class BaseProvider {
-    abstract public string $platform;
-    abstract public string $name;
-    
     /**
      * Non-streaming chat completion
      */

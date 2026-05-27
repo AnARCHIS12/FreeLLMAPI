@@ -1,4 +1,32 @@
-# FreeLLMAPI - PHP SQLite Version
+<div align="center">
+  <img src="assets/img/logo.png" alt="FreeLLMAPI" width="269" />
+
+  <p><strong>Self-hosted LLM API gateway with routing, fallback, encrypted keys and a unified endpoint.</strong></p>
+
+  <p>
+    <img alt="PHP" src="https://img.shields.io/badge/PHP-7.4%2B-ff2d3d?style=for-the-badge&labelColor=0a0a0a" />
+    <img alt="SQLite" src="https://img.shields.io/badge/SQLite-local-ff2d3d?style=for-the-badge&labelColor=0a0a0a" />
+    <img alt="Providers" src="https://img.shields.io/badge/providers-11-ff2d3d?style=for-the-badge&labelColor=0a0a0a" />
+    <img alt="License" src="https://img.shields.io/badge/license-MIT-ff2d3d?style=for-the-badge&labelColor=0a0a0a" />
+  </p>
+
+  <p>
+    Forked from / inspired by work from
+    <a href="https://github.com/LaurentVoanh">LaurentVoanh</a>.
+    Thanks to LaurentVoanh and everyone building open tooling around free-tier LLM access.
+  </p>
+
+  <p>
+    <a href="#features">Features</a> ·
+    <a href="#installation">Installation</a> ·
+    <a href="#api-usage">API Usage</a> ·
+    <a href="#supported-providers">Providers</a>
+  </p>
+</div>
+
+---
+
+# FreeLLMAPI
 
 A powerful, self-hosted LLM API gateway that aggregates multiple free-tier AI providers with intelligent routing and automatic fallback.
 
@@ -11,7 +39,7 @@ A powerful, self-hosted LLM API gateway that aggregates multiple free-tier AI pr
 - **Encryption**: AES-256-GCM encryption for all stored API keys
 - **Streaming Support**: Real-time SSE streaming responses
 - **Unified API**: Single endpoint for all providers
-- **Futuristic UI**: Cyberpunk-inspired design inspired by 2Advanced Studio
+- **Red/Black UI**: modern responsive interface with presentation, console, admin, setup and API docs pages
 
 ## Project Structure
 
@@ -37,7 +65,8 @@ PHP V0/
 │   ├── OpenAICompatProvider.php  # OpenAI-compatible providers
 │   └── ProviderRegistry.php      # Provider registration
 ├── assets/
-│   ├── css/style.css      # Futuristic cyberpunk styles
+│   ├── css/style.css      # Red/black responsive styles
+│   ├── img/logo.png       # Project logo
 │   └── js/app.js          # Frontend JavaScript
 └── data/
     └── freeapi.db         # SQLite database (auto-created)
@@ -52,26 +81,97 @@ PHP V0/
 
 ### Quick Start
 
-1. **Clone or copy the PHP V0 folder** to your web server
+For beginners, use the launcher for your system:
 
-2. **Set environment variable** (optional, key can be auto-generated):
-   ```bash
-   export ENCRYPTION_KEY=$(openssl rand -hex 32)
-   ```
+| System | Start file |
+|--------|------------|
+| Windows | Double-click `start.bat` |
+| macOS | Double-click `start.command` |
+| Linux | Run `./start.sh` |
 
-3. **Ensure write permissions** for the data directory:
-   ```bash
-   chmod 755 PHP\ V0/data
-   ```
+The launcher tries to install PHP automatically when possible, creates `data/`, starts the local server, and opens:
 
-4. **Access the application** in your browser:
-   ```
-   http://localhost:3001/
-   ```
+```text
+http://localhost:3001
+```
 
-5. **Get free API keys** from providers (see Setup Guide page)
+Manual start:
 
-6. **Add API keys** in the Admin panel
+```bash
+php -S localhost:3001 -t .
+```
+
+Then add your provider keys from the **Admin** page.
+
+### PHP Auto-Install Notes
+
+- Windows uses `winget`.
+- macOS uses Homebrew.
+- Linux uses `apt`, `dnf`, `pacman`, or `apk` when available.
+
+### Easy Production Deploy
+
+Use this when you have a domain and a VPS/server.
+
+1. Point your domain to the server IP:
+
+```text
+A record -> your server IP
+```
+
+2. Run on Linux/macOS:
+
+```bash
+./start-prod.sh
+```
+
+Or double-click on Windows:
+
+```text
+start-prod.bat
+```
+
+3. Edit `.env.prod`:
+
+```text
+DOMAIN=your-domain.com
+```
+
+4. Run again on Linux/macOS:
+
+```bash
+./start-prod.sh
+```
+
+Or double-click again on Windows:
+
+```text
+start-prod.bat
+```
+
+Done. The app runs at:
+
+```text
+https://your-domain.com
+```
+
+HTTPS is handled automatically by Caddy.
+
+Windows production requires Docker Desktop.
+
+### GitHub Pages Landing
+
+A static landing page is available in `docs/`.
+
+To publish it on GitHub Pages:
+
+1. Open your repository on GitHub
+2. Go to **Settings** -> **Pages**
+3. Select **Deploy from a branch**
+4. Choose your branch and `/docs`
+5. Save
+
+GitHub will publish the landing page. The PHP app itself still needs local/prod hosting.
 
 ## Configuration
 
@@ -164,8 +264,10 @@ Check that output buffering is disabled and `flush()` is supported.
 
 ## License
 
-MIT License - Feel free to use and modify.
+This project is released under the [MIT License](LICENSE).
 
 ## Credits
 
-Inspired by the need for reliable, free LLM access through provider aggregation.
+Forked from / inspired by work from [LaurentVoanh](https://github.com/LaurentVoanh).
+
+Thanks to [LaurentVoanh](https://github.com/LaurentVoanh) and everyone building open tooling around free-tier LLM access.

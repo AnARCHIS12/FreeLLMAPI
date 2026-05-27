@@ -82,8 +82,9 @@
     function showNotification(message, type = 'info') {
         const notification = document.createElement('div');
         notification.className = `message-banner ${type}`;
+        const iconClass = type === 'success' ? 'fa-check' : type === 'error' ? 'fa-xmark' : 'fa-circle-info';
         notification.innerHTML = `
-            <span class="message-icon">${type === 'success' ? '✓' : type === 'error' ? '✗' : 'ℹ'}</span>
+            <span class="message-icon"><i class="fa-solid ${iconClass}" aria-hidden="true"></i></span>
             <span>${message}</span>
         `;
         document.body.appendChild(notification);

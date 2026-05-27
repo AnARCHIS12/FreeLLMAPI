@@ -14,28 +14,28 @@
     <!-- Quick Stats -->
     <div class="admin-stats-grid">
         <div class="stat-card">
-            <div class="stat-icon">🔑</div>
+            <div class="stat-icon"><i class="fa-solid fa-key" aria-hidden="true"></i></div>
             <div class="stat-info">
                 <span class="stat-value"><?php echo count($apiKeys); ?></span>
                 <span class="stat-label">API Keys</span>
             </div>
         </div>
         <div class="stat-card">
-            <div class="stat-icon">🤖</div>
+            <div class="stat-icon"><i class="fa-solid fa-layer-group" aria-hidden="true"></i></div>
             <div class="stat-info">
                 <span class="stat-value"><?php echo count(array_filter($models, fn($m) => $m['enabled'])); ?>/<?php echo count($models); ?></span>
                 <span class="stat-label">Active Models</span>
             </div>
         </div>
         <div class="stat-card">
-            <div class="stat-icon">📊</div>
+            <div class="stat-icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div>
             <div class="stat-info">
                 <span class="stat-value"><?php echo count($recentRequests); ?></span>
                 <span class="stat-label">Recent Requests</span>
             </div>
         </div>
         <div class="stat-card">
-            <div class="stat-icon">⚡</div>
+            <div class="stat-icon"><i class="fa-solid fa-plug-circle-check" aria-hidden="true"></i></div>
             <div class="stat-info">
                 <span class="stat-value"><?php echo count($providers); ?></span>
                 <span class="stat-label">Providers</span>
@@ -45,7 +45,7 @@
 
     <!-- Unified API Key Section -->
     <div class="admin-section">
-        <h2>🔐 Unified API Key</h2>
+        <h2><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Unified API Key</h2>
         <div class="unified-key-card">
             <p>Use this key to access the unified chat endpoint. All requests will be automatically routed.</p>
             <div class="key-display">
@@ -61,7 +61,7 @@
 
     <!-- Add API Key Section -->
     <div class="admin-section">
-        <h2>➕ Add New API Key</h2>
+        <h2><i class="fa-solid fa-plus" aria-hidden="true"></i> Add New API Key</h2>
         <form method="POST" class="add-key-form">
             <input type="hidden" name="action" value="add_api_key">
             <div class="form-row">
@@ -91,7 +91,7 @@
 
     <!-- Existing API Keys -->
     <div class="admin-section">
-        <h2>📋 Existing API Keys</h2>
+        <h2><i class="fa-solid fa-list-check" aria-hidden="true"></i> Existing API Keys</h2>
         <?php if (empty($apiKeys)): ?>
         <div class="empty-state">
             <p>No API keys configured yet. <a href="?page=setup">Get your free API keys here</a>.</p>
@@ -148,7 +148,7 @@
 
     <!-- Models Management -->
     <div class="admin-section">
-        <h2>🤖 Model Management</h2>
+        <h2><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Model Management</h2>
         <div class="models-grid">
             <?php foreach ($models as $model): ?>
             <div class="model-card <?php echo $model['enabled'] ? 'enabled' : 'disabled'; ?>">
@@ -192,7 +192,7 @@
 
     <!-- Recent Activity -->
     <div class="admin-section">
-        <h2>📈 Recent Activity</h2>
+        <h2><i class="fa-solid fa-chart-simple" aria-hidden="true"></i> Recent Activity</h2>
         <?php if (empty($recentRequests)): ?>
         <div class="empty-state">
             <p>No recent requests. Start chatting to see activity!</p>
@@ -202,7 +202,7 @@
             <?php foreach (array_slice($recentRequests, 0, 20) as $request): ?>
             <div class="activity-item">
                 <div class="activity-icon <?php echo $request['status'] === 'success' ? 'success' : 'error'; ?>">
-                    <?php echo $request['status'] === 'success' ? '✓' : '✗'; ?>
+                    <i class="fa-solid <?php echo $request['status'] === 'success' ? 'fa-check' : 'fa-xmark'; ?>" aria-hidden="true"></i>
                 </div>
                 <div class="activity-info">
                     <div class="activity-title">
@@ -210,9 +210,9 @@
                         <span class="activity-provider">(<?php echo htmlspecialchars($request['platform']); ?>)</span>
                     </div>
                     <div class="activity-meta">
-                        <span>📝 <?php echo ($request['input_tokens'] + $request['output_tokens']); ?> tokens</span>
-                        <span>⏱️ <?php echo $request['latency_ms']; ?>ms</span>
-                        <span>🕒 <?php echo date('H:i:s', strtotime($request['created_at'])); ?></span>
+                        <span><i class="fa-solid fa-file-lines" aria-hidden="true"></i> <?php echo ($request['input_tokens'] + $request['output_tokens']); ?> tokens</span>
+                        <span><i class="fa-solid fa-stopwatch" aria-hidden="true"></i> <?php echo $request['latency_ms']; ?>ms</span>
+                        <span><i class="fa-solid fa-clock" aria-hidden="true"></i> <?php echo date('H:i:s', strtotime($request['created_at'])); ?></span>
                     </div>
                 </div>
                 <?php if ($request['error']): ?>

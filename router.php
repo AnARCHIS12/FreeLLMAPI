@@ -137,7 +137,7 @@ class RouterService {
             
             // Get model details
             $stmt = $db->prepare("SELECT * FROM models WHERE id = :id AND enabled = 1");
-            $stmt->bindValue(':id', SQLITE3_INTEGER, $modelDbId);
+            $stmt->bindValue(':id', $modelDbId, SQLITE3_INTEGER);
             $modelResult = $stmt->execute();
             $model = $modelResult->fetchArray(SQLITE3_ASSOC);
             
@@ -147,7 +147,7 @@ class RouterService {
             
             // Get available keys for this platform
             $stmt = $db->prepare("SELECT * FROM api_keys WHERE platform = :platform AND enabled = 1 AND status != 'invalid'");
-            $stmt->bindValue(':platform', SQLITE3_TEXT, $model['platform']);
+            $stmt->bindValue(':platform', $model['platform'], SQLITE3_TEXT);
             $keysResult = $stmt->execute();
             
             $keys = [];

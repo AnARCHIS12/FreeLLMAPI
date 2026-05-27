@@ -13,7 +13,7 @@
 
     <!-- Quick Start -->
     <div class="api-section">
-        <h2>🚀 Quick Start</h2>
+        <h2><i class="fa-solid fa-play" aria-hidden="true"></i> Quick Start</h2>
         <div class="quick-start-card">
             <p>Use the unified endpoint to chat with AI models. The system automatically routes your request to the best available provider.</p>
             <div class="code-block">
@@ -35,7 +35,7 @@
 
     <!-- Chat Endpoint -->
     <div class="api-section">
-        <h2>💬 Chat Completion</h2>
+        <h2><i class="fa-solid fa-comments" aria-hidden="true"></i> Chat Completion</h2>
         <p>Send a message and receive an AI response. Supports streaming for real-time output.</p>
         
         <h3>Request Format</h3>
@@ -203,7 +203,7 @@ for line in response.iter_lines():
 
     <!-- Models Endpoint -->
     <div class="api-section">
-        <h2>🤖 List Available Models</h2>
+        <h2><i class="fa-solid fa-layer-group" aria-hidden="true"></i> List Available Models</h2>
         <p>Get a list of all available models with their capabilities and limits.</p>
         
         <div class="code-block">
@@ -237,7 +237,7 @@ for line in response.iter_lines():
 
     <!-- Stats Endpoint -->
     <div class="api-section">
-        <h2>📊 Get Statistics</h2>
+        <h2><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Get Statistics</h2>
         <p>Retrieve usage statistics for monitoring and analytics.</p>
         
         <div class="code-block">
@@ -263,7 +263,7 @@ for line in response.iter_lines():
 
     <!-- Error Handling -->
     <div class="api-section">
-        <h2>⚠️ Error Handling</h2>
+        <h2><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Error Handling</h2>
         <p>The API returns standard HTTP status codes with detailed error messages.</p>
         
         <table class="params-table">
@@ -315,7 +315,7 @@ for line in response.iter_lines():
 
     <!-- Rate Limits -->
     <div class="api-section">
-        <h2>📋 Rate Limits</h2>
+        <h2><i class="fa-solid fa-list-check" aria-hidden="true"></i> Rate Limits</h2>
         <p>Rate limits vary by provider and model. The system automatically handles fallback when limits are reached.</p>
         
         <div class="limits-info">
@@ -333,22 +333,22 @@ for line in response.iter_lines():
 
     <!-- Best Practices -->
     <div class="api-section">
-        <h2>💡 Best Practices</h2>
+        <h2><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Best Practices</h2>
         <div class="tips-grid">
             <div class="tip-card">
-                <h3>🔄 Implement Retry Logic</h3>
+                <h3><i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i> Implement Retry Logic</h3>
                 <p>Although our system handles fallback automatically, implement client-side retry for transient errors.</p>
             </div>
             <div class="tip-card">
-                <h3>📦 Use Streaming</h3>
+                <h3><i class="fa-solid fa-box-open" aria-hidden="true"></i> Use Streaming</h3>
                 <p>Enable streaming for better UX, especially for long responses.</p>
             </div>
             <div class="tip-card">
-                <h3>🎯 Specify Model When Needed</h3>
+                <h3><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Specify Model When Needed</h3>
                 <p>Use <code>model_id</code> parameter when you need specific model capabilities.</p>
             </div>
             <div class="tip-card">
-                <h3>🔐 Secure Your Key</h3>
+                <h3><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Secure Your Key</h3>
                 <p>Never expose your unified API key in client-side code. Use a backend proxy.</p>
             </div>
         </div>

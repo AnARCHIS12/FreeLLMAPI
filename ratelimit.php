@@ -44,12 +44,12 @@ class RateLimitService {
                 INSERT INTO rate_limit_usage (platform, model_id, key_id, kind, tokens, created_at_ms)
                 VALUES (:platform, :model_id, :key_id, :kind, :tokens, :created_at_ms)
             ");
-            $stmt->bindValue(':platform', SQLITE3_TEXT, $platform);
-            $stmt->bindValue(':model_id', SQLITE3_TEXT, $modelId);
-            $stmt->bindValue(':key_id', SQLITE3_INTEGER, $keyId);
-            $stmt->bindValue(':kind', SQLITE3_TEXT, $kind);
-            $stmt->bindValue(':tokens', SQLITE3_INTEGER, $tokens);
-            $stmt->bindValue(':created_at_ms', SQLITE3_INTEGER, $now);
+            $stmt->bindValue(':platform', $platform, SQLITE3_TEXT);
+            $stmt->bindValue(':model_id', $modelId, SQLITE3_TEXT);
+            $stmt->bindValue(':key_id', $keyId, SQLITE3_INTEGER);
+            $stmt->bindValue(':kind', $kind, SQLITE3_TEXT);
+            $stmt->bindValue(':tokens', $tokens, SQLITE3_INTEGER);
+            $stmt->bindValue(':created_at_ms', $now, SQLITE3_INTEGER);
             $stmt->execute();
             
             // Clean old records
@@ -74,10 +74,10 @@ class RateLimitService {
                   AND kind = 'request'
                   AND created_at_ms > :cutoff
             ");
-            $stmt->bindValue(':platform', SQLITE3_TEXT, $platform);
-            $stmt->bindValue(':model_id', SQLITE3_TEXT, $modelId);
-            $stmt->bindValue(':key_id', SQLITE3_INTEGER, $keyId);
-            $stmt->bindValue(':cutoff', SQLITE3_INTEGER, $now - $windowMs);
+            $stmt->bindValue(':platform', $platform, SQLITE3_TEXT);
+            $stmt->bindValue(':model_id', $modelId, SQLITE3_TEXT);
+            $stmt->bindValue(':key_id', $keyId, SQLITE3_INTEGER);
+            $stmt->bindValue(':cutoff', $now - $windowMs, SQLITE3_INTEGER);
             $result = $stmt->execute();
             $row = $result->fetchArray(SQLITE3_ASSOC);
             return $row['used'] ?? 0;
@@ -101,10 +101,10 @@ class RateLimitService {
                   AND kind = 'tokens'
                   AND created_at_ms > :cutoff
             ");
-            $stmt->bindValue(':platform', SQLITE3_TEXT, $platform);
-            $stmt->bindValue(':model_id', SQLITE3_TEXT, $modelId);
-            $stmt->bindValue(':key_id', SQLITE3_INTEGER, $keyId);
-            $stmt->bindValue(':cutoff', SQLITE3_INTEGER, $now - $windowMs);
+            $stmt->bindValue(':platform', $platform, SQLITE3_TEXT);
+            $stmt->bindValue(':model_id', $modelId, SQLITE3_TEXT);
+            $stmt->bindValue(':key_id', $keyId, SQLITE3_INTEGER);
+            $stmt->bindValue(':cutoff', $now - $windowMs, SQLITE3_INTEGER);
             $result = $stmt->execute();
             $row = $result->fetchArray(SQLITE3_ASSOC);
             return (int)($row['used'] ?? 0);
@@ -219,10 +219,10 @@ class RateLimitService {
                 INSERT OR REPLACE INTO rate_limit_cooldowns (platform, model_id, key_id, expires_at_ms, created_at)
                 VALUES (:platform, :model_id, :key_id, :expires_at_ms, datetime('now'))
             ");
-            $stmt->bindValue(':platform', SQLITE3_TEXT, $platform);
-            $stmt->bindValue(':model_id', SQLITE3_TEXT, $modelId);
-            $stmt->bindValue(':key_id', SQLITE3_INTEGER, $keyId);
-            $stmt->bindValue(':expires_at_ms', SQLITE3_INTEGER, $expiresAt);
+            $stmt->bindValue(':platform', $platform, SQLITE3_TEXT);
+            $stmt->bindValue(':model_id', $modelId, SQLITE3_TEXT);
+            $stmt->bindValue(':key_id', $keyId, SQLITE3_INTEGER);
+            $stmt->bindValue(':expires_at_ms', $expiresAt, SQLITE3_INTEGER);
             $stmt->execute();
         } catch (Exception $e) {
             // Ignore
@@ -242,10 +242,10 @@ class RateLimitService {
                 WHERE platform = :platform AND model_id = :model_id AND key_id = :key_id
                 AND expires_at_ms > :now
             ");
-            $stmt->bindValue(':platform', SQLITE3_TEXT, $platform);
-            $stmt->bindValue(':model_id', SQLITE3_TEXT, $modelId);
-            $stmt->bindValue(':key_id', SQLITE3_INTEGER, $keyId);
-            $stmt->bindValue(':now', SQLITE3_INTEGER, $now);
+            $stmt->bindValue(':platform', $platform, SQLITE3_TEXT);
+            $stmt->bindValue(':model_id', $modelId, SQLITE3_TEXT);
+            $stmt->bindValue(':key_id', $keyId, SQLITE3_INTEGER);
+            $stmt->bindValue(':now', $now, SQLITE3_INTEGER);
             $result = $stmt->execute();
             return $result->fetchArray(SQLITE3_ASSOC) !== false;
         } catch (Exception $e) {
@@ -266,9 +266,9 @@ class RateLimitService {
                 WHERE platform = :platform AND model_id = :model_id AND key_id = :key_id
                 ORDER BY expires_at_ms ASC LIMIT 1
             ");
-            $stmt->bindValue(':platform', SQLITE3_TEXT, $platform);
-            $stmt->bindValue(':model_id', SQLITE3_TEXT, $modelId);
-            $stmt->bindValue(':key_id', SQLITE3_INTEGER, $keyId);
+            $stmt->bindValue(':platform', $platform, SQLITE3_TEXT);
+            $stmt->bindValue(':model_id', $modelId, SQLITE3_TEXT);
+            $stmt->bindValue(':key_id', $keyId, SQLITE3_INTEGER);
             $result = $stmt->execute();
             $row = $result->fetchArray(SQLITE3_ASSOC);
             

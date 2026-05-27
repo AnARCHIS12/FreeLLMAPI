@@ -1,4 +1,3 @@
-```
 # Compiled and binary files
 *.pyc
 *.class
@@ -23,6 +22,10 @@ composer.lock
 .env
 .env.local
 *.env.*
+!.env.prod.example
+
+# Runtime data
+data/
 
 # Editors
 .vscode/
@@ -39,4 +42,3 @@ build/
 target/
 *.tar.gz
 *.zip
-```

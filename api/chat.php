@@ -68,7 +68,7 @@ $db = Database::getInstance();
 $preferredModelDbId = null;
 if ($modelId !== null) {
     $stmt = $db->prepare("SELECT id FROM models WHERE id = :id AND enabled = 1");
-    $stmt->bindValue(':id', SQLITE3_INTEGER, (int)$modelId);
+    $stmt->bindValue(':id', (int)$modelId, SQLITE3_INTEGER);
     $result = $stmt->execute();
     $row = $result->fetchArray(SQLITE3_ASSOC);
     if ($row) {
@@ -143,10 +143,10 @@ try {
             
             // Log request
             $stmt = $db->prepare("INSERT INTO requests (platform, model_id, key_id, status, latency_ms) VALUES (:platform, :model_id, :key_id, 'success', :latency_ms)");
-            $stmt->bindValue(':platform', SQLITE3_TEXT, $routed['platform']);
-            $stmt->bindValue(':model_id', SQLITE3_TEXT, $routed['modelId']);
-            $stmt->bindValue(':key_id', SQLITE3_INTEGER, $routed['keyId']);
-            $stmt->bindValue(':latency_ms', SQLITE3_INTEGER, $latencyMs);
+            $stmt->bindValue(':platform', $routed['platform'], SQLITE3_TEXT);
+            $stmt->bindValue(':model_id', $routed['modelId'], SQLITE3_TEXT);
+            $stmt->bindValue(':key_id', $routed['keyId'], SQLITE3_INTEGER);
+            $stmt->bindValue(':latency_ms', $latencyMs, SQLITE3_INTEGER);
             $stmt->execute();
             
         } catch (Exception $e) {
@@ -160,10 +160,10 @@ try {
             
             // Log error
             $stmt = $db->prepare("INSERT INTO requests (platform, model_id, key_id, status, error) VALUES (:platform, :model_id, :key_id, 'error', :error)");
-            $stmt->bindValue(':platform', SQLITE3_TEXT, $routed['platform']);
-            $stmt->bindValue(':model_id', SQLITE3_TEXT, $routed['modelId']);
-            $stmt->bindValue(':key_id', SQLITE3_INTEGER, $routed['keyId']);
-            $stmt->bindValue(':error', SQLITE3_TEXT, $e->getMessage());
+            $stmt->bindValue(':platform', $routed['platform'], SQLITE3_TEXT);
+            $stmt->bindValue(':model_id', $routed['modelId'], SQLITE3_TEXT);
+            $stmt->bindValue(':key_id', $routed['keyId'], SQLITE3_INTEGER);
+            $stmt->bindValue(':error', $e->getMessage(), SQLITE3_TEXT);
             $stmt->execute();
         }
     } else {
@@ -182,12 +182,12 @@ try {
         
         // Log request
         $stmt = $db->prepare("INSERT INTO requests (platform, model_id, key_id, status, input_tokens, output_tokens, latency_ms) VALUES (:platform, :model_id, :key_id, 'success', :input_tokens, :output_tokens, :latency_ms)");
-        $stmt->bindValue(':platform', SQLITE3_TEXT, $routed['platform']);
-        $stmt->bindValue(':model_id', SQLITE3_TEXT, $routed['modelId']);
-        $stmt->bindValue(':key_id', SQLITE3_INTEGER, $routed['keyId']);
-        $stmt->bindValue(':input_tokens', SQLITE3_INTEGER, $inputTokens);
-        $stmt->bindValue(':output_tokens', SQLITE3_INTEGER, $outputTokens);
-        $stmt->bindValue(':latency_ms', SQLITE3_INTEGER, $latencyMs);
+        $stmt->bindValue(':platform', $routed['platform'], SQLITE3_TEXT);
+        $stmt->bindValue(':model_id', $routed['modelId'], SQLITE3_TEXT);
+        $stmt->bindValue(':key_id', $routed['keyId'], SQLITE3_INTEGER);
+        $stmt->bindValue(':input_tokens', $inputTokens, SQLITE3_INTEGER);
+        $stmt->bindValue(':output_tokens', $outputTokens, SQLITE3_INTEGER);
+        $stmt->bindValue(':latency_ms', $latencyMs, SQLITE3_INTEGER);
         $stmt->execute();
         
         // Add routing info
@@ -210,10 +210,10 @@ try {
     // Log error
     try {
         $stmt = $db->prepare("INSERT INTO requests (platform, model_id, key_id, status, error) VALUES (:platform, :model_id, :key_id, 'error', :error)");
-        $stmt->bindValue(':platform', SQLITE3_TEXT, $routed['platform'] ?? 'unknown');
-        $stmt->bindValue(':model_id', SQLITE3_TEXT, $routed['modelId'] ?? 'unknown');
-        $stmt->bindValue(':key_id', SQLITE3_INTEGER, $routed['keyId'] ?? 0);
-        $stmt->bindValue(':error', SQLITE3_TEXT, $e->getMessage());
+        $stmt->bindValue(':platform', $routed['platform'] ?? 'unknown', SQLITE3_TEXT);
+        $stmt->bindValue(':model_id', $routed['modelId'] ?? 'unknown', SQLITE3_TEXT);
+        $stmt->bindValue(':key_id', $routed['keyId'] ?? 0, SQLITE3_INTEGER);
+        $stmt->bindValue(':error', $e->getMessage(), SQLITE3_TEXT);
         $stmt->execute();
     } catch (Exception $logError) {
         // Ignore logging errors
