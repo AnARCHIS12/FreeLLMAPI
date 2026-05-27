@@ -19,6 +19,9 @@
         
         // Auto-dismiss messages
         autoDismissMessages();
+
+        // Styled confirmations
+        setupConfirmForms();
     }
 
     // Keyboard shortcuts
@@ -32,7 +35,7 @@
             
             // Escape to close modals (future feature)
             if (e.key === 'Escape') {
-                // Close any open modals
+                closeAppModal();
             }
         });
     }
@@ -52,7 +55,13 @@
     window.copyToClipboard = function(text) {
         if (navigator.clipboard) {
             navigator.clipboard.writeText(text).then(() => {
-                showNotification('Copied to clipboard!', 'success');
+                showAppModal({
+                    type: 'success',
+                    title: 'Copied',
+                    message: 'Content copied to clipboard.',
+                    confirmText: 'OK',
+                    showCancel: false
+                });
             }).catch(err => {
                 console.error('Failed to copy:', err);
                 fallbackCopy(text);
@@ -71,12 +80,148 @@
         textarea.select();
         try {
             document.execCommand('copy');
-            showNotification('Copied to clipboard!', 'success');
+            showAppModal({
+                type: 'success',
+                title: 'Copied',
+                message: 'Content copied to clipboard.',
+                confirmText: 'OK',
+                showCancel: false
+            });
         } catch (err) {
-            showNotification('Failed to copy', 'error');
+            showAppModal({
+                type: 'error',
+                title: 'Copy failed',
+                message: 'Your browser blocked clipboard access.',
+                confirmText: 'OK',
+                showCancel: false
+            });
         }
         document.body.removeChild(textarea);
     }
+
+    function setupConfirmForms() {
+        document.addEventListener('submit', function(e) {
+            const form = e.target;
+            if (!(form instanceof HTMLFormElement) || !form.dataset.confirm || form.dataset.confirmed === 'true') {
+                return;
+            }
+
+            e.preventDefault();
+
+            showAppModal({
+                type: 'warning',
+                title: 'Confirm action',
+                message: form.dataset.confirm,
+                confirmText: 'Confirm',
+                cancelText: 'Cancel',
+                showCancel: true,
+                onConfirm: function() {
+                    form.dataset.confirmed = 'true';
+                    form.requestSubmit();
+                }
+            });
+        });
+
+        document.addEventListener('click', function(e) {
+            const button = e.target.closest('button[data-confirm]');
+            if (!button || !button.form || button.form.dataset.confirm) {
+                return;
+            }
+
+            button.form.dataset.confirm = button.dataset.confirm;
+        });
+    }
+
+    function showAppModal(options) {
+        closeAppModal();
+
+        const settings = Object.assign({
+            type: 'info',
+            title: 'Notice',
+            message: '',
+            confirmText: 'OK',
+            cancelText: 'Cancel',
+            showCancel: false,
+            onConfirm: null,
+        }, options || {});
+
+        const overlay = document.createElement('div');
+        overlay.className = 'app-modal-overlay';
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+
+        const iconClass = {
+            success: 'fa-check',
+            error: 'fa-xmark',
+            warning: 'fa-triangle-exclamation',
+            info: 'fa-circle-info',
+        }[settings.type] || 'fa-circle-info';
+
+        overlay.innerHTML = `
+            <div class="app-modal app-modal-${settings.type}">
+                <button class="app-modal-close" type="button" aria-label="Close">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+                <div class="app-modal-icon">
+                    <i class="fa-solid ${iconClass}" aria-hidden="true"></i>
+                </div>
+                <div class="app-modal-body">
+                    <h2>${escapeHtml(settings.title)}</h2>
+                    <p>${escapeHtml(settings.message)}</p>
+                </div>
+                <div class="app-modal-actions">
+                    ${settings.showCancel ? `<button type="button" class="btn btn-ghost app-modal-cancel">${escapeHtml(settings.cancelText)}</button>` : ''}
+                    <button type="button" class="btn btn-primary app-modal-confirm">${escapeHtml(settings.confirmText)}</button>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(overlay);
+        document.body.classList.add('modal-open');
+
+        overlay.querySelector('.app-modal-close').addEventListener('click', closeAppModal);
+        const cancelButton = overlay.querySelector('.app-modal-cancel');
+        if (cancelButton) {
+            cancelButton.addEventListener('click', closeAppModal);
+        }
+
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                closeAppModal();
+            }
+        });
+
+        overlay.querySelector('.app-modal-confirm').addEventListener('click', function() {
+            const onConfirm = settings.onConfirm;
+            closeAppModal();
+            if (typeof onConfirm === 'function') {
+                onConfirm();
+            }
+        });
+
+        setTimeout(() => overlay.querySelector('.app-modal-confirm').focus(), 0);
+    }
+
+    function closeAppModal() {
+        const overlay = document.querySelector('.app-modal-overlay');
+        if (!overlay) {
+            return;
+        }
+        overlay.remove();
+        document.body.classList.remove('modal-open');
+    }
+
+    function escapeHtml(value) {
+        return String(value)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
+    window.showAppModal = showAppModal;
+    window.closeAppModal = closeAppModal;
 
     // Utility: Show notification
     function showNotification(message, type = 'info') {

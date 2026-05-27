@@ -54,7 +54,7 @@
             </div>
             <form method="POST" style="display: inline;">
                 <input type="hidden" name="action" value="regenerate_unified_key">
-                <button type="submit" class="btn btn-warning" onclick="return confirm('Regenerate key? Old key will stop working.')">Regenerate</button>
+                <button type="submit" class="btn btn-warning" data-confirm="Regenerate key? Old key will stop working.">Regenerate</button>
             </form>
         </div>
     </div>
@@ -132,7 +132,7 @@
                         </td>
                         <td><?php echo date('Y-m-d H:i', strtotime($key['created_at'])); ?></td>
                         <td>
-                            <form method="POST" style="display: inline;" onsubmit="return confirm('Delete this key?')">
+                            <form method="POST" style="display: inline;" data-confirm="Delete this key?">
                                 <input type="hidden" name="action" value="delete_api_key">
                                 <input type="hidden" name="key_id" value="<?php echo $key['id']; ?>">
                                 <button type="submit" class="btn btn-small btn-danger">Delete</button>
@@ -224,13 +224,3 @@
         <?php endif; ?>
     </div>
 </div>
-
-<script>
-function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(() => {
-        alert('Copied to clipboard!');
-    }).catch(err => {
-        console.error('Failed to copy:', err);
-    });
-}
-</script>

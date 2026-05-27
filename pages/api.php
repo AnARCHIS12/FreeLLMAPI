@@ -358,10 +358,6 @@ for line in response.iter_lines():
 <script>
 function copyCode(elementId) {
     const text = document.getElementById(elementId).textContent;
-    navigator.clipboard.writeText(text).then(() => {
-        alert('Copied!');
-    }).catch(err => {
-        console.error('Failed to copy:', err);
-    });
+    window.copyToClipboard(text);
 }
 </script>

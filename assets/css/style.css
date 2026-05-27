@@ -192,6 +192,125 @@ body::after {
     color: var(--error);
 }
 
+body.modal-open {
+    overflow: hidden;
+}
+
+.app-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(8px);
+    animation: modalFadeIn 0.18s ease;
+}
+
+.app-modal {
+    width: min(440px, 100%);
+    position: relative;
+    padding: 28px;
+    border-radius: 18px;
+    background: linear-gradient(145deg, rgba(20, 21, 26, 0.98), rgba(8, 9, 11, 0.98));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.56), 0 0 0 1px rgba(255, 45, 61, 0.08);
+    animation: modalPopIn 0.2s cubic-bezier(0.2, 0.85, 0.25, 1);
+}
+
+.app-modal::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(circle at top left, rgba(255, 45, 61, 0.17), transparent 42%);
+}
+
+.app-modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.045);
+    color: var(--text-secondary);
+    cursor: pointer;
+    z-index: 1;
+}
+
+.app-modal-close:hover {
+    color: #fff;
+    border-color: rgba(255, 45, 61, 0.5);
+}
+
+.app-modal-icon {
+    width: 54px;
+    height: 54px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 18px;
+    border-radius: 16px;
+    background: rgba(255, 45, 61, 0.12);
+    color: var(--accent-primary);
+    font-size: 1.25rem;
+    position: relative;
+    z-index: 1;
+}
+
+.app-modal-success .app-modal-icon {
+    background: rgba(46, 213, 115, 0.12);
+    color: var(--success);
+}
+
+.app-modal-error .app-modal-icon {
+    background: rgba(255, 71, 87, 0.12);
+    color: var(--error);
+}
+
+.app-modal-body,
+.app-modal-actions {
+    position: relative;
+    z-index: 1;
+}
+
+.app-modal-body h2 {
+    margin: 0 40px 8px 0;
+    font-size: 1.35rem;
+    line-height: 1.2;
+}
+
+.app-modal-body p {
+    margin: 0;
+    color: var(--text-secondary);
+}
+
+.app-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.app-modal-actions .btn {
+    min-width: 110px;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes modalPopIn {
+    from { opacity: 0; transform: translateY(12px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 @keyframes slideDown {
     from { transform: translate(-50%, -20px); opacity: 0; }
     to { transform: translate(-50%, 0); opacity: 1; }
@@ -2098,6 +2217,25 @@ body::after {
         width: calc(100% - 24px);
         padding: 12px 14px;
         font-size: 0.86rem;
+    }
+
+    .app-modal-overlay {
+        align-items: end;
+        padding: 12px;
+    }
+
+    .app-modal {
+        padding: 22px;
+        border-radius: 18px;
+    }
+
+    .app-modal-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .app-modal-actions .btn {
+        width: 100%;
     }
 
     .landing-hero {
