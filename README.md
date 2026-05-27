@@ -26,7 +26,6 @@
 
 ---
 
-# FreeLLMAPI
 
 A powerful, self-hosted LLM API gateway that aggregates multiple free-tier AI providers with intelligent routing and automatic fallback.
 
