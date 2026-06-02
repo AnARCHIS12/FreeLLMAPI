@@ -10,11 +10,7 @@
     <img alt="License" src="https://img.shields.io/badge/license-MIT-ff2d3d?style=for-the-badge&labelColor=0a0a0a" />
   </p>
 
-  <p>
-    Forked from / inspired by work from
-    <a href="https://github.com/LaurentVoanh">LaurentVoanh</a>.
-    Thanks to LaurentVoanh and everyone building open tooling around free-tier LLM access.
-  </p>
+  
 
   <p>
     <a href="#features">Features</a> ·
